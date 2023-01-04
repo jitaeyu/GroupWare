@@ -15,7 +15,8 @@ public class LoginContorller {
 
     @PostMapping("/login")
     public String Login(Model model, Authentication authentication){
-        System.out.println(authentication.getDetails());
-        return "/home";
+        System.out.println("aa");
+        return "/index";
     }
+
 }

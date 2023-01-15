@@ -19,7 +19,5 @@ public class LoginService{
 //       return userRepository.findById();
 //    }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
+
 }

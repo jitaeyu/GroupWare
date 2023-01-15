@@ -18,15 +18,14 @@ import java.io.PrintWriter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserPrincipalService userPrincipalService;
 
-    @Bean
-    DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(this.userPrincipalService);
-
-        return daoAuthenticationProvider;
-    }
+//    @Bean
+//    DaoAuthenticationProvider authenticationProvider(){
+//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//
+//
+//        return daoAuthenticationProvider;
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,7 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                     .disable()
                 .authorizeRequests()
-                .antMatchers("/loginpage")
+                .antMatchers("/loginpage","/signpage","/signin")
+
                     .permitAll()
                     .anyRequest().authenticated()
                 .and()

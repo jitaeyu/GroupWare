@@ -1,6 +1,7 @@
 package com.groupware.company.contorller;
 
 import com.groupware.company.domain.User;
+import com.groupware.company.service.AuthService;
 import com.groupware.company.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,25 +16,36 @@ import java.util.List;
 public class LoginContorller {
 
     @Autowired
-    private LoginService loginService;
+    private AuthService authService;
 
-    public LoginContorller(LoginService loginService) {
-        this.loginService = loginService;
-    }
+
 
     @GetMapping("/loginpage")
     public String LoginPage(Model model){
 
         return "/login/loginpage";
     }
+    @GetMapping("/signpage")
+    public String Sign(Model model){
+        return "/sign/signinpage";
+    }
+
+    @PostMapping("/signin")
+    public String SignIn(User user){
+
+        authService.signUpUser(user);
+        System.out.println("가입완료");
+        return "/login/loginpage";
+    }
+
 
     @PostMapping("/login")
     public String Login(Model model, Authentication authentication){
-        List<User> list = loginService.findAll();
-        for(User k:list) {
-            System.out.println(k);
-        }
-        model.addAttribute("list",list);
+//        List<User> list = loginService.findAll();
+//        for(User k:list) {
+//            System.out.println(k);
+//        }
+//        model.addAttribute("list",list);
 
         System.out.println("aa");
         return "/index";
